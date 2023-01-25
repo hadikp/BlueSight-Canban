@@ -22,8 +22,8 @@ public class ColController {
 
     @GetMapping
     @Operation(summary = "Find all Column")
-    public List<ColDto> findAllColumn(){
-        return service.findAllColumn();
+    public List<ColDto> listAllColumn(){
+        return service.listAllColumn();
     }
 
     @GetMapping("/{id}")

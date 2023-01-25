@@ -15,7 +15,7 @@ public class ColService {
     private ColRepository repository;
 
 
-    public List<ColDto> findAllColumn() {
+    public List<ColDto> listAllColumn() {
         List<Col> cols = repository.findAll();
         return cols.stream().map(c -> modelMapper.map(c, ColDto.class)).collect(Collectors.toList());
     }

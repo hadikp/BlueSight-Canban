@@ -18,7 +18,7 @@ public class BoardController {
 
     @GetMapping
     public List<BoardDto> listAllBoard(){
-        return service.findAllBoard();
+        return service.listAllBoard();
     }
 
     @GetMapping("/{id}")

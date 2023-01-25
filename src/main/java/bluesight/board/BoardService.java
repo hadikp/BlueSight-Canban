@@ -14,7 +14,7 @@ public class BoardService {
     private BoardRepository repository;
     private ModelMapper modelMapper;
 
-    public List<BoardDto> findAllBoard() {
+    public List<BoardDto> listAllBoard() {
         List<Board> boards = repository.findAll();
         return boards.stream().map(b -> modelMapper.map(b, BoardDto.class)).collect(Collectors.toList());
     }
