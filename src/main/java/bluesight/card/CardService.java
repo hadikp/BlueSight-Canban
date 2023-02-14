@@ -21,6 +21,9 @@ public class CardService {
 
     public CardDto findCardById(Long id) {
         Card card = repository.findById(id).orElseThrow(() -> new CardNotFoundException(id));
-        return modelMapper.map(card, CardDto.class);
+        CardExistTime cardExistTime = card.nowMinusStartDate();
+        CardDto cardDtoWithoutExistingTime = modelMapper.map(card, CardDto.class);
+        cardDtoWithoutExistingTime.setCardExistTime(cardExistTime);
+        return cardDtoWithoutExistingTime;
     }
 }

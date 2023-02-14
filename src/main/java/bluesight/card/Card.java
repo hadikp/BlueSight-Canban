@@ -8,7 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.*;
+import java.util.Calendar;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -42,6 +44,10 @@ public class Card {
     @Column(name = "due_at")
     private LocalDate dueAt;
 
+    @Embedded
+    @Transient
+    private CardExistTime cardExistTime;
+
     @ManyToOne
     private Col col;
 
@@ -50,6 +56,12 @@ public class Card {
 
     @ManyToOne
     private Swimlane swimlane;
+
+    public Card(String title, String description, LocalDate createDate) {
+        this.title = title;
+        this.description = description;
+        this.createDate = createDate;
+    }
 
     public Card(String title, String description, int priority, int status, int position, LocalDate createDate, LocalDate openedAt, LocalDate closedAt, LocalDate dueAt) {
         this.title = title;
@@ -61,5 +73,22 @@ public class Card {
         this.openedAt = openedAt;
         this.closedAt = closedAt;
         this.dueAt = dueAt;
+    }
+
+    public CardExistTime nowMinusStartDate(){
+        LocalDate dateNow = LocalDate.now();
+
+        long createDateInSecond = this.createDate.toEpochSecond(LocalTime.NOON, ZoneOffset.MIN);
+        long nowInSecond = dateNow.toEpochSecond(LocalTime.NOON, ZoneOffset.MIN);
+        long existInDay = (nowInSecond - createDateInSecond) / 60 / 60 / 24;
+        int existInWeek = (int) (existInDay / 7);
+        long remainDays = existInDay - existInWeek * 7;
+
+        CardExistTime cardExistTime = new CardExistTime(existInWeek, remainDays);
+
+        System.out.println(existInDay);
+        System.out.println(existInWeek);
+        System.out.println(remainDays);
+        return cardExistTime;
     }
 }

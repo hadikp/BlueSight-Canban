@@ -25,5 +25,6 @@ public class CardDto {
     private Long colId;
     private Long userId;
     private Long swimlaneId;
+    private CardExistTime cardExistTime;
 }
 
