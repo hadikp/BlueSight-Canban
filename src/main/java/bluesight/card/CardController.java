@@ -28,4 +28,9 @@ public class CardController {
     private CardDto findCardById(@PathVariable("id") Long id){
         return service.findCardById(id);
     }
+
+    @GetMapping("/swimlane/{id}")
+    private List<CardDto> listCardBySwimlane(@PathVariable("id") Long id){
+        return service.listCardBySwimlane(id);
+    }
 }

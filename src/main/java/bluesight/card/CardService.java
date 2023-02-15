@@ -16,14 +16,20 @@ public class CardService {
 
     public List<CardDto> listAllCard() {
         List<Card> cards = repository.findAll();
+        for (Card card: cards) {
+            SetCardExistTime(card);
+        }
         return cards.stream().map(c -> modelMapper.map(c, CardDto.class)).collect(Collectors.toList());
     }
 
     public CardDto findCardById(Long id) {
         Card card = repository.findById(id).orElseThrow(() -> new CardNotFoundException(id));
+        SetCardExistTime(card);
+        return modelMapper.map(card, CardDto.class);
+    }
+
+    private static void SetCardExistTime(Card card) {
         CardExistTime cardExistTime = card.nowMinusStartDate();
-        CardDto cardDtoWithoutExistingTime = modelMapper.map(card, CardDto.class);
-        cardDtoWithoutExistingTime.setCardExistTime(cardExistTime);
-        return cardDtoWithoutExistingTime;
+        card.setCardExistTime(cardExistTime);
     }
 }
