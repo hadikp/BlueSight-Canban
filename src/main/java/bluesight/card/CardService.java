@@ -1,5 +1,6 @@
 package bluesight.card;
 
+import bluesight.swimlane.SwimlaneRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 public class CardService {
 
     private CardRepository repository;
+    private SwimlaneRepository swimlaneRepository;
     private ModelMapper modelMapper;
 
     public List<CardDto> listAllCard() {
@@ -31,5 +33,10 @@ public class CardService {
     private static void SetCardExistTime(Card card) {
         CardExistTime cardExistTime = card.nowMinusStartDate();
         card.setCardExistTime(cardExistTime);
+    }
+
+    public List<CardDto> listCardBySwimlane(Long id) {
+        List<Card> cards = swimlaneRepository.listCardThisSwimlane(id).getCards();
+        return cards.stream().map(c -> modelMapper.map(c, CardDto.class)).collect(Collectors.toList());
     }
 }
