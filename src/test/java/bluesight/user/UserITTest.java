@@ -9,12 +9,22 @@ import bluesight.swimlane.Swimlane;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(statements = "delete from boards")
+@Sql(statements = "delete from cards")
+@Sql(statements = "delete from columns")
+@Sql(statements = "delete from projects")
+@Sql(statements = "delete from squads")
+@Sql(statements = "delete from swimlanes")
+@Sql(statements = "delete from users")
+@Sql(statements = "delete from user_squad")
+@Sql(statements = "delete from swimlane_column")
 class UserITTest {
 
     @Autowired
