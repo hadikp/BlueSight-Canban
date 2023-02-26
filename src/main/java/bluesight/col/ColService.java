@@ -29,7 +29,7 @@ public class ColService {
         return modelMapper.map(col, ColDto.class);
     }
 
-    public void deleteCardFromColumnCardList(Long colId, Long cardId) {
+    /*public void deleteCardFromColumnCardList(Long colId, Long cardId) {
         Col findColumn = repository.findById(colId).orElseThrow(() -> new ColNotFoundException(colId));
         Card card = cardRepository.findById(cardId).orElseThrow(() ->new CardNotFoundException(cardId));
 
@@ -45,5 +45,13 @@ public class ColService {
         }else {
             System.out.println("No such card in the ColumnCardlist!");
         }
+    }*/
+
+    public void addCardToNewColumn(Long colId, Long cardId) {
+        Col findColumn = repository.findById(colId).orElseThrow(() -> new ColNotFoundException(colId));
+        Card card = cardRepository.findById(cardId).orElseThrow(() ->new CardNotFoundException(cardId));
+
+        findColumn.addNewCard(card);
+        repository.save(findColumn);
     }
 }

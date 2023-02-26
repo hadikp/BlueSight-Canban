@@ -31,11 +31,11 @@ public class ColController {
         return service.findById(id);
     }
 
-    @DeleteMapping("/{colId}/card/{cardId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "Delete a specific column on a specific card")
-    @ApiResponse(responseCode = "204", description = "This card has benn deleted from the col cardList")
-    public void deleteCardFromColumnList(@PathVariable("colId") Long colId, @PathVariable("cardId") Long cardId){
-        service.deleteCardFromColumnCardList(colId, cardId);
+    @PostMapping("/{colId}/card/{cardId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Add a card to the new column cardList")
+    @ApiResponse(responseCode = "201", description = "This card has benn added to the another column")
+    public void addCardToNewColumn(@PathVariable("colId") Long colId, @PathVariable("cardId") Long cardId){
+        service.addCardToNewColumn(colId, cardId);
     }
 }
