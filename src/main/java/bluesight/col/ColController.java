@@ -1,11 +1,10 @@
 package bluesight.col;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +29,13 @@ public class ColController {
     @Operation(summary = "Find one Column by id")
     public ColDto findColumnById(@PathVariable("id") Long id){
         return service.findById(id);
+    }
+
+    @DeleteMapping("/{colId}/card/{cardId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete a specific column on a specific card")
+    @ApiResponse(responseCode = "204", description = "This card has benn deleted from the col cardList")
+    public void deleteCardFromColumnList(@PathVariable("colId") Long colId, @PathVariable("cardId") Long cardId){
+        service.deleteCardFromColumnCardList(colId, cardId);
     }
 }
