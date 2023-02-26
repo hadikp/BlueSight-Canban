@@ -37,6 +37,9 @@ public class CardService {
 
     public List<CardDto> listCardBySwimlane(Long id) {
         List<Card> cards = swimlaneRepository.listCardThisSwimlane(id).getCards();
+        for (Card card: cards) {
+            SetCardExistTime(card);
+        }
         return cards.stream().map(c -> modelMapper.map(c, CardDto.class)).collect(Collectors.toList());
     }
 }

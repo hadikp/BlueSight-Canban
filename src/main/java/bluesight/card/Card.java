@@ -86,9 +86,6 @@ public class Card {
 
         CardExistTime cardExistTime = new CardExistTime(existInWeek, remainDays);
 
-        System.out.println(existInDay);
-        System.out.println(existInWeek);
-        System.out.println(remainDays);
         return cardExistTime;
     }
 }
