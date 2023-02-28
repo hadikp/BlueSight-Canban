@@ -9,8 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.*;
-import java.util.Calendar;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -30,7 +28,7 @@ public class Card {
     private int status;
 
     @Column(name = "position_number")
-    private int position_number;
+    private int positionNumber;
 
     @Column(name = "create_date")
     private LocalDate createDate;
@@ -63,12 +61,20 @@ public class Card {
         this.createDate = createDate;
     }
 
-    public Card(String title, String description, int priority, int status, int position, LocalDate createDate, LocalDate openedAt, LocalDate closedAt, LocalDate dueAt) {
+    public Card(String title, String description, LocalDate createDate, LocalDate openedAt, int priority, int positionNumber, LocalDate dueAt) {
+        this(title, description, createDate);
+        this.openedAt = openedAt;
+        this.priority = priority;
+        this.positionNumber = positionNumber;
+        this.dueAt = dueAt;
+    }
+
+    public Card(String title, String description, int priority, int status, int positionNumber, LocalDate createDate, LocalDate openedAt, LocalDate closedAt, LocalDate dueAt) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.status = status;
-        this.position_number = position;
+        this.positionNumber = positionNumber;
         this.createDate = createDate;
         this.openedAt = openedAt;
         this.closedAt = closedAt;
@@ -77,7 +83,6 @@ public class Card {
 
     public CardExistTime nowMinusStartDate(){
         LocalDate dateNow = LocalDate.now();
-
         long createDateInSecond = this.createDate.toEpochSecond(LocalTime.NOON, ZoneOffset.MIN);
         long nowInSecond = dateNow.toEpochSecond(LocalTime.NOON, ZoneOffset.MIN);
         long existInDay = (nowInSecond - createDateInSecond) / 60 / 60 / 24;

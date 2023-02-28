@@ -1,6 +1,5 @@
 package bluesight.col;
 
-import org.springframework.http.HttpStatus;
 import org.zalando.problem.AbstractThrowableProblem;
 import org.zalando.problem.Status;
 

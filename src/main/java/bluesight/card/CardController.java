@@ -1,7 +1,9 @@
 package bluesight.card;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +34,13 @@ public class CardController {
         return service.listCardBySwimlane(id);
     }
 
-   /* @PostMapping("/colId/{cardId}")
-    @Operation(summary = "Update the card column Id")
-    public CardDto updateColId(@PathVariable("cardId") Long cardId, @RequestBody c)*/
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a card")
+    @ApiResponse(responseCode = "201", description = "card has been created")
+    public CardDto createCard(@RequestBody CardCommand command){
+        return service.createCard(command);
+    }
+
+
 }
