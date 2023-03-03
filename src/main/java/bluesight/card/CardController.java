@@ -42,5 +42,14 @@ public class CardController {
         return service.createCard(command);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Delete card")
+    @ApiResponse(responseCode = "204", description = "Card has been deleted")
+    public void deleteCard(@PathVariable("id") Long id){
+        service.deleteCard(id);
+    }
+
+
 
 }

@@ -71,4 +71,8 @@ public class CardService {
         cardRepository.save(card);
         return modelMapper.map(card, CardDto.class);
     }
+
+    public void deleteCard(Long id) {
+        cardRepository.deleteById(id);
+    }
 }
