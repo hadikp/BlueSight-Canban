@@ -42,6 +42,12 @@ public class CardController {
         return service.createCard(command);
     }
 
+    @PutMapping("/{id}")
+    @Operation(summary = "Update the card")
+    public CardDto updateCard(@PathVariable("id") Long id, @RequestBody UpdateCard command){
+        return service.updateCard(id, command);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete card")

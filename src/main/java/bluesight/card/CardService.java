@@ -9,6 +9,7 @@ import bluesight.swimlane.SwimlaneRepository;
 import bluesight.user.User;
 import bluesight.user.UserNotfoundException;
 import bluesight.user.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -74,5 +75,17 @@ public class CardService {
 
     public void deleteCard(Long id) {
         cardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public CardDto updateCard(Long id, UpdateCard command) {
+        Card findCard = cardRepository.findById(id).orElseThrow(() -> new ColNotFoundException(id));
+        findCard.setTitle(command.getTitle());
+        findCard.setDescription(command.getDescription());
+        findCard.setPriority(command.getPriority());
+        findCard.setPositionNumber(command.getPositionNumber());
+        findCard.setDueAt(command.getDueAt());
+        return modelMapper.map(findCard, CardDto.class);
+
     }
 }
