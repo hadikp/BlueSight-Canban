@@ -48,6 +48,12 @@ public class CardController {
         return service.updateCard(id, command);
     }
 
+    @PutMapping("/{cardId}/position")
+    @Operation(summary = "Update the card position_number")
+    public CardDto updateCardPosition(@PathVariable("cardId") Long cardId, @RequestBody UpdateCardPosition command){
+        return service.updateCardPosition(cardId, command);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete card")

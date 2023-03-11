@@ -79,7 +79,7 @@ public class CardService {
 
     @Transactional
     public CardDto updateCard(Long id, UpdateCard command) {
-        Card findCard = cardRepository.findById(id).orElseThrow(() -> new ColNotFoundException(id));
+        Card findCard = cardRepository.findById(id).orElseThrow(() -> new CardNotFoundException(id));
         findCard.setTitle(command.getTitle());
         findCard.setDescription(command.getDescription());
         findCard.setPriority(command.getPriority());
@@ -87,5 +87,12 @@ public class CardService {
         findCard.setDueAt(command.getDueAt());
         return modelMapper.map(findCard, CardDto.class);
 
+    }
+
+    @Transactional
+    public CardDto updateCardPosition(Long cardId, UpdateCardPosition command) {
+        Card findCard = cardRepository.findById(cardId).orElseThrow(() -> new CardNotFoundException(cardId));
+        findCard.setPositionNumber(command.getPositionNumber());
+        return modelMapper.map(findCard, CardDto.class);
     }
 }
