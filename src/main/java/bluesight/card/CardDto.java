@@ -16,7 +16,7 @@ public class CardDto {
     private String title;
     private String description;
     private int priority;
-    private int status;
+    private Status status;
     private int positionNumber;
     private LocalDate createDate;
     private LocalDate openedAt;

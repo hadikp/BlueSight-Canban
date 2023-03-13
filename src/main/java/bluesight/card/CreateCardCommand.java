@@ -9,11 +9,12 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardCommand {
+public class CreateCardCommand {
 
     private String title;
     private String description;
     private int priority;
+    private Status status;
     private int positionNumber;
     private LocalDate dueAt;
     private Long colId;

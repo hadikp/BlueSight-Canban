@@ -2,6 +2,7 @@ package bluesight.user;
 
 import bluesight.board.Board;
 import bluesight.card.Card;
+import bluesight.card.Status;
 import bluesight.col.Col;
 import bluesight.project.Project;
 import bluesight.squad.Squad;
@@ -49,9 +50,9 @@ class UserITTest {
         Col col1 = new Col("Column1", 1, 111, 5);
         Col col2 = new Col("Column2", 2, 111, 5);
         Col col3 = new Col("Column3", 1, 111, 5);
-        Card card1 = new Card("Card1-title", "Description of card1", 2, 1, 1, LocalDate.of(2022, 12, 20),
+        Card card1 = new Card("Card1-title", "Description of card1", 2, Status.ACTIVE, 1, LocalDate.of(2022, 12, 20),
                 LocalDate.of(2022, 12, 21), LocalDate.of(2023, 01,21), LocalDate.of(2023, 01, 30));
-        Card card2 = new Card("Card2-title", "Description of card2", 1, 2, 2, LocalDate.of(2022, 12, 20),
+        Card card2 = new Card("Card2-title", "Description of card2", 1, Status.ACTIVE, 2, LocalDate.of(2022, 12, 20),
                 LocalDate.of(2022, 12, 22), LocalDate.of(2023, 02,19), LocalDate.of(2023, 03, 01));
 
         peter.addCard(card1);

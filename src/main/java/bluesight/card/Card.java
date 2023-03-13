@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import java.time.*;
 
@@ -25,7 +26,9 @@ public class Card {
     private String description;
 
     private int priority;
-    private int status;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column(name = "position_number")
     private int positionNumber;
@@ -61,15 +64,16 @@ public class Card {
         this.createDate = createDate;
     }
 
-    public Card(String title, String description, LocalDate createDate, LocalDate openedAt, int priority, int positionNumber, LocalDate dueAt) {
+    public Card(String title, String description, LocalDate createDate, LocalDate openedAt, int priority, Status status, int positionNumber, LocalDate dueAt) {
         this(title, description, createDate);
         this.openedAt = openedAt;
         this.priority = priority;
+        this.status = status;
         this.positionNumber = positionNumber;
         this.dueAt = dueAt;
     }
 
-    public Card(String title, String description, int priority, int status, int positionNumber, LocalDate createDate, LocalDate openedAt, LocalDate closedAt, LocalDate dueAt) {
+    public Card(String title, String description, int priority, Status status, int positionNumber, LocalDate createDate, LocalDate openedAt, LocalDate closedAt, LocalDate dueAt) {
         this.title = title;
         this.description = description;
         this.priority = priority;

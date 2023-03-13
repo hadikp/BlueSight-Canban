@@ -38,7 +38,7 @@ public class CardController {
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create a card")
     @ApiResponse(responseCode = "201", description = "card has been created")
-    public CardDto createCard(@RequestBody CardCommand command){
+    public CardDto createCard(@RequestBody CreateCardCommand command){
         return service.createCard(command);
     }
 

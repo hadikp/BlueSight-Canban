@@ -55,10 +55,10 @@ public class CardService {
         return cards.stream().map(c -> modelMapper.map(c, CardDto.class)).collect(Collectors.toList());
     }
 
-    public CardDto createCard(CardCommand command) {
+    public CardDto createCard(CreateCardCommand command) {
         LocalDate createDate = LocalDate.now();
         LocalDate openDate = LocalDate.now();
-        Card card = new Card(command.getTitle(), command.getDescription(), createDate, openDate, command.getPriority(), command.getPositionNumber(),
+        Card card = new Card(command.getTitle(), command.getDescription(), createDate, openDate, command.getPriority(), command.getStatus(), command.getPositionNumber(),
                  command.getDueAt());
         Long colId = command.getColId();
         Long userId = command.getUserId();
