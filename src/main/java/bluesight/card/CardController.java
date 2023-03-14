@@ -54,6 +54,12 @@ public class CardController {
         return service.updateCardPosition(cardId, command);
     }
 
+    @PutMapping("/status/{id}")
+    @Operation(summary = "The ACTIVE status is changed to DELETED")
+    public CardDto updateCardStatus(@PathVariable("id") Long id){
+        return service.updateCardStatus(id);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete card")

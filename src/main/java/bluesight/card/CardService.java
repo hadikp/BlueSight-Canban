@@ -95,4 +95,13 @@ public class CardService {
         findCard.setPositionNumber(command.getPositionNumber());
         return modelMapper.map(findCard, CardDto.class);
     }
+
+    @Transactional
+    public CardDto updateCardStatus(Long id) {
+        Card findCard = cardRepository.findById(id).orElseThrow(() -> new CardNotFoundException(id));
+        if(findCard.getStatus().equals(Status.ACTIVE)){
+            findCard.setStatus(Status.DELETED);
+        }
+        return modelMapper.map(findCard, CardDto.class);
+    }
 }
